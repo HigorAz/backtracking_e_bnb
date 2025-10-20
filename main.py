@@ -20,30 +20,25 @@ def subset_sum_backtracking(S, target):
     found = False
     nodes = 0
     prunings_overflow = 0
-
+ 
     def bt(index, current_sum, chosen):
         nonlocal found, solution, nodes, prunings_overflow
         nodes += 1
-
         # Solução encontrada
         if current_sum == target:
             solution = chosen.copy()
             found = True
             return True
-       
         # Poda 1: soma ultrapassa o alvo
         if current_sum > target:
             prunings_overflow += 1
             return False
-
         # Fim da lista
         if index == n:
             return False
-
                 # Tenta incluir S[index]
         if bt(index + 1, current_sum + S[index], chosen + [S[index]]):
             return True
-
         # Tenta excluir S[index]
         if bt(index + 1, current_sum, chosen):
             return True
@@ -79,30 +74,24 @@ def subset_sum_branch_and_bound(S, target):
     def bb(index, current_sum, chosen):
         nonlocal found, solution, nodes, prunings_overflow, prunings_inviavel
         nodes += 1
-
         # Solução encontrada
         if current_sum == target:
             solution = chosen.copy()
             found = True
             return True
-
         if index == n:
             return False
-
         # Poda 1: soma passou do alvo
         if current_sum > target:
             prunings_overflow += 1
             return False
-
         # Poda 2: mesmo somando o restante, não atinge o alvo
         if current_sum + remaining_sum(index) < target:
             prunings_inviavel += 1
             return False
-
         # Inclui S[index]
         if bb(index + 1, current_sum + S[index], chosen + [S[index]]):
             return True
-
         # Exclui S[index]
         if bb(index + 1, current_sum, chosen):
             return True
@@ -137,24 +126,20 @@ def executar_experimentos():
         nodes_bt, nodes_bb = [], []
         prunes_bt, prunes_bb = [], []
         prunes_inv = []
-
         for _ in range(trials):
             S = base_large[:n]
             target = sum(random.sample(S, k=max(1, n // 3)))
-
             # BACKTRACKING
             found_bt, sol_bt, stats_bt = subset_sum_backtracking(S, target)
             tempos_bt.append(stats_bt["tempo_s"])
             nodes_bt.append(stats_bt["nodes_explorados"])
             prunes_bt.append(stats_bt["prunings"])
-
             # BRANCH AND BOUND
             found_bb, sol_bb, stats_bb = subset_sum_branch_and_bound(S, target)
             tempos_bb.append(stats_bb["tempo_s"])
             nodes_bb.append(stats_bb["nodes_explorados"])
             prunes_bb.append(stats_bb["prunings_overflow"] + stats_bb["prunings_inviavel"])
             prunes_inv.append(stats_bb["prunings_inviavel"])
-
         resultados.append({
             "n": n,
             "tempo_bt": np.mean(tempos_bt),
@@ -233,4 +218,5 @@ if __name__ == "__main__":
     df = pd.DataFrame(resultados)
     print("\nResumo Final:")
     print(df.to_string(index=False))
+
     salvar_resultados(resultados)

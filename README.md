@@ -2,7 +2,7 @@
     <img loading="lazy" src="https://files.engaged.com.br/5db0810e95b4f900077e887e/account/5db0810e95b4f900077e887e/xMCS8NFKTMqwhefy8WLd_catolica-horizontal.png" width="300">
 </p>
 
-# Backtracking & BNB
+# Comparativo entre Backtracking e Branch and Bound (B&B)
 Projeto da disciplina de **Algoritmos Avançados**.
 
 ## Situação do Projeto
@@ -12,26 +12,31 @@ Projeto da disciplina de **Algoritmos Avançados**.
 
 ## Introdução
 
+Este projeto implementa e compara duas abordagens clássicas para o **problema da Soma de Subconjuntos (Subset Sum)**:
 
+- **Backtracking puro**: percorre todas as combinações possíveis, realizando podas simples apenas quando a soma parcial ultrapassa o valor-alvo (*overflow*).
+- **Branch and Bound (B&B)**: utiliza as mesmas bases do backtracking, mas adiciona **podas mais inteligentes**, como:
+  - **Poda por overflow**: interrompe o ramo quando a soma ultrapassa o alvo;
+  - **Poda por inviabilidade**: elimina ramos que, mesmo somando todos os valores restantes, não conseguem atingir o alvo;
+  - **Ordenação decrescente dos elementos**: ajuda a testar primeiro os caminhos mais promissores.
 
-## Estrutura
+A execução gera dados comparativos de desempenho entre as duas técnicas, mostrando:
+- Tempo médio de execução;
+- Nós explorados;
+- Número de podas realizadas.
 
-```
-.
-├── main.py        # script principal
-└── README.md
-```
+Também são gerados **gráficos** e um **arquivo CSV** com os resultados, permitindo análise visual e estatística do comportamento dos algoritmos conforme o tamanho do problema aumenta.
+
 ## Como executar
 
 ### Replit
 1. Crie um projeto Python.
-2. Envie `main.py` e `entrada.txt`.
+2. Envie `main.py`.
 3. Clique em **Run** (ou execute `python3 main.py` no console).
 
 ### VSCode / Terminal
 ```bash
-python main.py                        # usa 'entrada.txt' por padrão
-python main.py entrada_exemplo.txt    # para usar outro arquivo em específico
+python main.py
 ```
 
 ## Contribuidores

@@ -1,0 +1,4 @@
+Poda overflow em index=2, soma=19, caminho=[10, 9]
+Poda overflow em index=3, soma=18, caminho=[10, 8]
+Poda overflow em index=4, soma=17, caminho=[10, 7]
+Poda overflow em index=5, soma=16, caminho=[10, 6]

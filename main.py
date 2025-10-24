@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Comparativo Backtracking vs Branch and Bound
 Caso fixo: S={3,5,7,2,8,6,4,1,9,10}, T=15
@@ -230,3 +229,4 @@ def executar():
 
 if __name__ == "__main__":
     executar()
+
